@@ -27,6 +27,7 @@ public class ifElseCetakKRS09 {
         }
 
         sc.close();
+        
     }
 }
 
