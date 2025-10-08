@@ -101,7 +101,5 @@ public class CM1_09 {
     System.out.println("NIM : " +nim);
     System.out.println("Mata Kuliah\t\t\t\t\t\tUTS\tUAS\tTugas\t\t\tNilai Akhir\t\t\tStatus Huruf\t\t\tStatus");
     System.out.println("---------------------------------------------------------------------------------------");
-    System.out.println("Algoritma Pemrograman\t%.2f\t%.2f\t%.2f\t%.2f\t%s\t%s\n" + uts1, uas1, tugas1, status1); 
-    System.out.println("Algoritma Pemrograman\t%.2f\t%.2f\t%.2f\t%.2f\t%s\t%s\n" + uts2, uas2, tugas2, status2);
-    }
+        }
 }
