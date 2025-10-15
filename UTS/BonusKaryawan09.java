@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class BonusKaryawan09 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         // Input data karyawan
         System.out.print("Masukkan nilai kinerja (1-100): ");
         double kinerja = sc.nextDouble();
