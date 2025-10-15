@@ -7,10 +7,10 @@ public class CM1_Felia09 {
         System.out.println("===== INPUT DATA MAHASISWA =====");
 
         System.out.print("Masukkan nama mahasiswa : ");
-        String nama = sc.nextLine(); // nama pakai String
+        String nama = sc.nextLine().trim(); 
 
         System.out.print("Masukkan NIM mahasiswa : ");
-        String nim = sc.nextLine(); // NIM juga String biar bisa huruf/angka
+        int nim = sc.nextInt(); 
 
         // ===================== Mata Kuliah 1 =====================
         System.out.println("\n--- Mata kuliah 1 : Algoritma dan Pemrograman ---");

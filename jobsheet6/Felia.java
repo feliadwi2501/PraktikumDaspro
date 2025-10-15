@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class CM1_09 {
+public class Felia {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
