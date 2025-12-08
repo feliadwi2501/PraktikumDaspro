@@ -1,0 +1,194 @@
+
+import java.util.Scanner;
+
+public class CMMagang09 {
+
+    // Array untuk menyimpan data pendaftar
+    // Setiap array menyimpan 1 jenis data mahasiswa
+    static String[] dataNama = new String[100];
+    static String[] dataNim = new String[100];
+    static String[] dataProdi = new String[100];
+    static String[] dataPerusahaan = new String[100];
+    static int[] dataSemester = new int[100];
+    static String[] dataStatus = new String[100];
+
+    // Variabel untuk mengetahui jumlah data yang sudah masuk
+    static int jumlahData = 0;
+
+    static Scanner input = new Scanner(System.in);
+
+    // 1 
+    // fungsi ini digunakan untuk menambah data mahasiswa ke array
+    static void tambahPendaftar() {
+        System.out.println("\n=== Form Tambah Data Magang ===");
+
+        System.out.print("Nama Mahasiswa : ");
+        dataNama[jumlahData] = input.nextLine();
+
+        System.out.print("NIM : ");
+        dataNim[jumlahData] = input.nextLine();
+
+        System.out.print("Program Studi : ");
+        dataProdi[jumlahData] = input.nextLine();
+
+        System.out.print("Tempat Magang : ");
+        dataPerusahaan[jumlahData] = input.nextLine();
+
+        // Validasi semester hanya boleh 6 atau 7
+        int sem;
+        do {
+            System.out.print("Semester (6 atau 7): ");
+            sem = input.nextInt();
+
+            if (sem != 6 && sem != 7) {
+                System.out.println("⚠ Semester hanya boleh 6 atau 7. Silakan ulangi!");
+            }
+        } while (sem != 6 && sem != 7);
+
+        dataSemester[jumlahData] = sem;
+        input.nextLine(); 
+
+        // Validasi status
+        String status;
+        do {
+            System.out.print("Status (Diterima / Menunggu / Ditolak): ");
+            status = input.nextLine();
+
+            if (!status.equalsIgnoreCase("Diterima") &&
+                !status.equalsIgnoreCase("Menunggu") &&
+                !status.equalsIgnoreCase("Ditolak")) {
+
+                System.out.println("⚠ Status tidak valid, ulangi lagi!");
+            }
+
+        } while (!status.equalsIgnoreCase("Diterima") &&
+                !status.equalsIgnoreCase("Menunggu") &&
+                !status.equalsIgnoreCase("Ditolak"));
+
+        dataStatus[jumlahData] = status;
+
+        jumlahData++; // menambah jumlah data
+        System.out.println("Data pendaftaran magang berhasil ditambahkan.\nTotal pendaftar: " + jumlahData);
+    }
+
+    // 2
+    // Menampilkan seluruh data mahasiswa dalam bentuk tabel
+    static void tampilkanSemua() {
+
+        System.out.println("\n=== Data Pendaftar Magang ===");
+
+        if (jumlahData == 0) {
+            System.out.println("Belum ada data yang tersimpan.");
+            return;
+        }
+
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.printf("%-3s %-18s %-12s %-18s %-12s %-12s\n",
+                "No", "Nama", "NIM", "Prodi", "Semester", "Status");
+        System.out.println("--------------------------------------------------------------------------");
+
+        for (int i = 0; i < jumlahData; i++) {
+            System.out.printf("%-3d %-18s %-12s %-18s %-12d %-12s\n",
+                    (i + 1),
+                    dataNama[i],
+                    dataNim[i],
+                    dataProdi[i],
+                    dataSemester[i],
+                    dataStatus[i]);
+        }
+    }
+
+    // 3
+    // Menampilkan mahasiswa yang prodi-nya sama seperti input pengguna
+    static void cariByProdi() {
+        System.out.print("\nMasukkan nama prodi yang ingin dicari: ");
+        String cari = input.nextLine();
+
+        boolean ada = false;
+        
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.printf("%-3s %-18s %-12s %-18s %-12s %-12s\n",
+                "No", "Nama", "NIM", "Prodi", "Semester", "Status");
+        System.out.println("--------------------------------------------------------------------------");
+
+        for (int i = 0; i < jumlahData; i++) {
+            if (dataProdi[i].equalsIgnoreCase(cari)) {
+                System.out.printf("%-3d %-18s %-12s %-18s %-12d %-12s\n",
+                        (i + 1),
+                        dataNama[i],
+                        dataNim[i],
+                        dataProdi[i],
+                        dataSemester[i],
+                        dataStatus[i]);
+                ada = true;
+            }
+        }
+
+        if (!ada) {
+            System.out.println("Tidak ditemukan mahasiswa dengan prodi: " + cari);
+        }
+    }
+
+    // 4
+    // Menghitung jumlah mahasiswa berdasarkan status (diterima, menunggu, ditolak)
+    static void hitungBerdasarkanStatus() {
+
+        int diterima = 0, menunggu = 0, ditolak = 0;
+
+        // Menghitung status dengan loop 
+        for (int i = 0; i < jumlahData; i++) {
+            String s = dataStatus[i];
+            if (s.equalsIgnoreCase("Diterima")) diterima++;
+            else if (s.equalsIgnoreCase("Menunggu")) menunggu++;
+            else if (s.equalsIgnoreCase("Ditolak")) ditolak++;
+        }
+
+        // Menampilkan hasil
+        System.out.println("\n=== Rekap Jumlah Pendaftar berdasarkan Status ===");
+        System.out.println("Diterima : " + diterima);
+        System.out.println("Menunggu : " + menunggu);
+        System.out.println("Ditolak  : " + ditolak);
+        System.out.println("Total    : " + jumlahData);
+    }
+
+    // 5
+    // main fungsi utama untuk menjalankan program
+    public static void main(String[] args) {
+
+        int pilih;
+
+        do {
+            System.out.println("\n=== Menu Sistem Pendaftaran Magang ===");
+            System.out.println("1. Tambah Data Magang");
+            System.out.println("2. Tampilkan Semua Data");
+            System.out.println("3. Cari Berdasarkan Prodi");
+            System.out.println("4. Hitung Status Pendaftar");
+            System.out.println("5. Keluar");
+            System.out.print("Pilih (1-5): ");
+
+            pilih = input.nextInt();
+            input.nextLine(); 
+
+            switch (pilih) {
+                    case 1:
+                    tambahPendaftar();
+                    break;
+                case 2:
+                    tampilkanSemua();
+                    break;
+                case 3:
+                    cariByProdi();
+                    break;
+                case 4:
+                    hitungBerdasarkanStatus();
+                    break;
+                case 5:
+                    System.out.println("Keluar dari program.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+            }
+
+        } while (pilih != 5);
+    }
+}
